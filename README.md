@@ -8,7 +8,7 @@ BLEのデバイスをスキャンして、指定したサービスを持つキ�
 
 ESP1.0.2のBLEライブラリにはバグがあり、デバイスによってはハングアップしてしまうのと、同じCharacteristic UUIDを複数もつデバイスの場合、UUIDをキーにしたMapでしか受け取れないため黒魔術(#define private public)を使って無理やり拡張してあります。
 
-### 参考ブログ
+### 参考ページ
 - [M5StickC(ESP32)でダイソーのBluetoothシャッターを操作](https://lang-ship.com/blog/?p=704)
 
 ## BLE_clientEx
@@ -17,5 +17,25 @@ BLEのデバイスをスキャンして、指定したサービスを持つキ�
 
 ESP1.0.2のBLEライブラリにはバグがあり、デバイスによってはハングアップしてしまうのと、同じCharacteristic UUIDを複数もつデバイスの場合、UUIDをキーにしたMapでしか受け取れないため黒魔術(#define private public)を使って無理やり拡張してあります。
 
-### 参考ブログ
+### 参考ページ
 - [M5StickC(ESP32)でダイソーのBluetoothシャッターを操作](https://lang-ship.com/blog/?p=704)
+
+## BluetoothSerial
+
+Bluetooth Serialのサンプル。
+
+## ButtonTest
+
+Buttonクラスのサンプル。
+
+## RealtimeDataLog
+
+RealtimeDataLogのサンプル。
+
+## RTCSetNTP
+
+RTCをNTPサーバーから時刻設定するサンプル。
+
+## RTCSetWeb
+
+RTCをAPモードにしたM5StickCに接続したブラウザから時刻設定するサンプル。
