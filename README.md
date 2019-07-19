@@ -39,3 +39,7 @@ RTCをNTPサーバーから時刻設定するサンプル。
 ## RTCSetWeb
 
 RTCをAPモードにしたM5StickCに接続したブラウザから時刻設定するサンプル。
+
+## SPI_SD
+
+SPI接続のSDカードを使うサンプル。
