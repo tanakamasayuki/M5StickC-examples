@@ -2,7 +2,7 @@
 #include "SD.h"
 
 // PIN配置
-enum { spi_sck = 0, spi_miso = 26, spi_mosi = 32, spi_ss = 33 };
+enum { spi_sck = 0, spi_miso = 36, spi_mosi = 26, spi_ss = -1 };
 
 void setup()
 {
