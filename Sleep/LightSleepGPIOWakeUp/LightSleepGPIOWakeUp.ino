@@ -7,9 +7,11 @@ void setup() {
   // シリアル初期化待ち
   delay(1000);
 
-  // GPIO37(M5StickCのHOMEボタン)がLOWになったら起動
+  // GPIO37(M5StickCのHOMEボタン)かGPIO39(M5StickCの右ボタン)がLOWになったら起動
   pinMode(GPIO_NUM_37, INPUT_PULLUP);
+  pinMode(GPIO_NUM_39, INPUT_PULLUP);
   gpio_wakeup_enable(GPIO_NUM_37, GPIO_INTR_LOW_LEVEL);
+  gpio_wakeup_enable(GPIO_NUM_39, GPIO_INTR_LOW_LEVEL);
 
   // GPIOをウェイクアップソースとして有効にする
   esp_sleep_enable_gpio_wakeup();

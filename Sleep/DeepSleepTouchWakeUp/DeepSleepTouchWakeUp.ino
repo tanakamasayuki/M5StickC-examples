@@ -31,6 +31,7 @@ void setup(){
   }
 
   // GPIO32, 33のタッチ有効、しきい値は環境によって異なるので反応しない場合には増減が必要
+  // ただし32と33のタッチだけはなぜか番号が入れ替わっているので、GPIO32を取得するときは33を指定する必要がある
   static int threshold = 16;
   pinMode(GPIO_NUM_32, INPUT);
   pinMode(GPIO_NUM_33, INPUT);
