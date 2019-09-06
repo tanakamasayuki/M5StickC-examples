@@ -8,8 +8,8 @@ void setup() {
   delay(1000);
 
   // GPIO37(M5StickCのHOMEボタン)かGPIO39(M5StickCの右ボタン)がLOWになったら起動
-  pinMode(GPIO_NUM_37, INPUT_PULLUP);
-  pinMode(GPIO_NUM_39, INPUT_PULLUP);
+  pinMode(GPIO_NUM_37, INPUT);
+  pinMode(GPIO_NUM_39, INPUT);
   gpio_wakeup_enable(GPIO_NUM_37, GPIO_INTR_LOW_LEVEL);
   gpio_wakeup_enable(GPIO_NUM_39, GPIO_INTR_LOW_LEVEL);
 
