@@ -8,7 +8,7 @@ void setup() {
   delay(1000);
 
   // GPIO37(M5StickCのHOMEボタン)がLOWになったら起動
-  pinMode(GPIO_NUM_37, INPUT_PULLUP);
+  pinMode(GPIO_NUM_37, INPUT);
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_37, LOW);
 }
 
