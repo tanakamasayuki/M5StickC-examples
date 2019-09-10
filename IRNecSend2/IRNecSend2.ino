@@ -1,35 +1,32 @@
 #include <M5StickC.h>
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
-#include <IRutils.h>
 
 const uint16_t kIrLed = 9;              // M5StickCはGPIO9にIRが内蔵
 
 IRsend irsend(kIrLed);                  // IR送信を宣言
 
-const uint32_t CUSTOMER_CODE = 0x00ff;  // カスタマーコードをセット
-
 // リモコンコード保存用構造体
 struct REMOTE {
   char name[9];
-  uint8_t command;
+  uint64_t command;
 };
 
 // リモコンコード一覧
 REMOTE remote[] = {
-  { "POWER" , 0x45 },
-  { "VOL+"  , 0x46 },
-  { "VOL-"  , 0x15 },
-  { "0"     , 0x16 },
-  { "1"     , 0x0c },
-  { "2"     , 0x18 },
-  { "3"     , 0x5e },
-  { "4"     , 0x08 },
-  { "5"     , 0x1c },
-  { "6"     , 0x5a },
-  { "7"     , 0x42 },
-  { "8"     , 0x52 },
-  { "9"     , 0x4a },
+  { "POWER" , 0x00FFA25DUL },
+  { "VOL+"  , 0x00FF629DUL },
+  { "VOL-"  , 0x00FFA857UL },
+  { "0"     , 0x00FF6897UL },
+  { "1"     , 0x00FF30CFUL },
+  { "2"     , 0x00FF18E7UL },
+  { "3"     , 0x00FF7A85UL },
+  { "4"     , 0x00FF10EFUL },
+  { "5"     , 0x00FF38C7UL },
+  { "6"     , 0x00FF5AA5UL },
+  { "7"     , 0x00FF42BDUL },
+  { "8"     , 0x00FF4AB5UL },
+  { "9"     , 0x00FF52ADUL },
 };
 
 int cursor = 0; // カーソル位置
@@ -53,17 +50,10 @@ void loop() {
   // M5ボタンで送信
   if ( M5.BtnA.wasPressed() ) {
     // 送信4Byte(カスタマーコード2Byte+リモコンコード+反転リモコンコード)
-    uint64_t send = 0;
-    send = (uint64_t)reverseBits(CUSTOMER_CODE >> 8, 8) << 24;    // カスタマーコード(上位8bit)
-    send += (uint64_t)reverseBits(CUSTOMER_CODE & 0xff, 8) << 16; // カスタマーコード(下位8bit)
-    send += reverseBits(remote[cursor].command, 8) << 8;          // リモコンコードを順番入れ替えて送信
-    send += reverseBits(remote[cursor].command, 8) ^ 0xff;        // リモコンコードのビット反転（パリティ）
-    irsend.sendNEC(send);                                         // 送信
+    irsend.sendNEC(remote[cursor].command);
 
     // デバッグ表示
-    Serial.printf("Send IR : 0x%08LX", send);
-    Serial.printf("(customer=0x%04X, ", CUSTOMER_CODE);
-    Serial.printf("command=0x%02X)\n", remote[cursor].command);
+    Serial.printf("Send IR : 0x%08LX", remote[cursor].command);
   }
 
   // 右ボタンでカーソル移動
