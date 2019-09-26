@@ -1,4 +1,12 @@
-#include "BLEDeviceEx.h"
+#include "BLEDevice.h"
+
+// 1.0.3で未定義のメソッドを実装する
+std::map<uint16_t, BLERemoteCharacteristic*>* BLERemoteService::getCharacteristicsByHandle() {
+  if (!m_haveCharacteristics) {
+    retrieveCharacteristics();
+  }
+  return &m_characteristicMapByHandle;
+}
 
 // 検索するBLEデバイス。serviceUUIDを調べる場合には空にする(例はHuman Interface Device"00001812-0000-1000-8000-00805f9b34fb")
 static BLEUUID serviceUUID("1812");
@@ -27,7 +35,7 @@ bool connectToServer() {
 
   // Characteristic一覧
   Serial.println("characteristic一覧");
-  std::map<uint16_t, BLERemoteCharacteristic*>* mapCharacteristics = retrieveCharacteristicsEx(pRemoteService);
+  std::map<uint16_t, BLERemoteCharacteristic*>* mapCharacteristics = pRemoteService->getCharacteristicsByHandle();
   for (std::map<uint16_t, BLERemoteCharacteristic*>::iterator i = mapCharacteristics->begin(); i != mapCharacteristics->end(); ++i) {
     Serial.print(" - characteristic UUID : ");
     Serial.print(i->second->getUUID().toString().c_str());

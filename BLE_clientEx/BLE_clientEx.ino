@@ -5,7 +5,15 @@
    updated by chegewara
 */
 
-#include "BLEDeviceEx.h"
+#include "BLEDevice.h"
+
+// 1.0.3で未定義のメソッドを実装する
+std::map<uint16_t, BLERemoteCharacteristic*>* BLERemoteService::getCharacteristicsByHandle() {
+  if (!m_haveCharacteristics) {
+    retrieveCharacteristics();
+  }
+  return &m_characteristicMapByHandle;
+}
 
 // The remote service we wish to connect to.
 static BLEUUID serviceUUID("1812");
@@ -22,7 +30,9 @@ static void notifyCallback(
   bool isNotify) {
   Serial.print("Notify callback for characteristic ");
   Serial.print(pBLERemoteCharacteristic->getUUID().toString().c_str());
-  Serial.print(" of data length ");
+  Serial.print("(");
+  Serial.print(pBLERemoteCharacteristic->getHandle());
+  Serial.print(") of data length ");
   Serial.print(length);
   Serial.print(" data: ");
   for ( int i = 0 ; i < length ; i++ ) {
@@ -65,7 +75,7 @@ bool connectToServer() {
   }
   Serial.println(" - Found our service");
 
-  std::map<uint16_t, BLERemoteCharacteristic*>* mapCharacteristics = retrieveCharacteristicsEx(pRemoteService);
+  std::map<uint16_t, BLERemoteCharacteristic*>* mapCharacteristics = pRemoteService->getCharacteristicsByHandle();
   for (std::map<uint16_t, BLERemoteCharacteristic*>::iterator i = mapCharacteristics->begin(); i != mapCharacteristics->end(); ++i) {
     if (i->second->canNotify()) {
       Serial.println(" - Add Notify");
