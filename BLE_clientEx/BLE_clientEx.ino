@@ -7,14 +7,6 @@
 
 #include "BLEDevice.h"
 
-// 1.0.3で未定義のメソッドを実装する
-std::map<uint16_t, BLERemoteCharacteristic*>* BLERemoteService::getCharacteristicsByHandle() {
-  if (!m_haveCharacteristics) {
-    retrieveCharacteristics();
-  }
-  return &m_characteristicMapByHandle;
-}
-
 // The remote service we wish to connect to.
 static BLEUUID serviceUUID("1812");
 
