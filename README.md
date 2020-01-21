@@ -43,3 +43,35 @@ RTCをAPモードにしたM5StickCに接続したブラウザから時刻設定�
 ## SPI_SD
 
 SPI接続のSDカードを使うサンプル。
+
+## AxpExtPowerLink
+
+Axp192の自動電源オフ
+
+## IRNecSend
+
+赤外線送信
+
+## IRNecSend2
+
+赤外線送信(NEC)
+
+## MicophoneAutoGain
+
+マイク録音
+
+## RealtimeDataLog
+
+データロガー
+
+## Sleep
+
+LightSleepとDeepSleep
+
+## efont
+
+多言語フォント
+
+## M5StickcBluetoothPresenter
+
+Bluetooth キーボードを利用したパワーポイント操作
