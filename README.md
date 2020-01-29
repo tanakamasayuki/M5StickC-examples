@@ -75,3 +75,11 @@ LightSleepとDeepSleep
 ## M5StickcBluetoothPresenter
 
 Bluetooth キーボードを利用したパワーポイント操作
+
+## WiFiSmartConfig
+
+Wi-Fi接続のサンプル。10秒間接続できなかった場合にはESP-TOUCH(SmartConfig)でWi-Fi設定を取得する。
+
+## readWiFiSetting
+
+NVSから最後に接続したWi-Fi設定を取得する。
