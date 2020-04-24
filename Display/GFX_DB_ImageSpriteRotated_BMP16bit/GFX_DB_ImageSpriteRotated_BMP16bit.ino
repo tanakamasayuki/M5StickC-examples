@@ -15,7 +15,12 @@ class M5Display {};                 // 既存の描画関数は使えなくす�
 #include "utility/ST7735_Defines.h" // BLACKなどの定義を読み込む
 
 static LGFX lcd;                    // 描画クラス
-static LGFX_Sprite sprite(&lcd);    // スプライト
+
+// 画面ダブルバッファ用スプライト
+static LGFX_Sprite canvas(&lcd);
+
+// 画像用スプライト
+static LGFX_Sprite sprite(&lcd);
 
 // FPS計算
 static uint32_t sec;
@@ -29,11 +34,18 @@ void setup() {
   lcd.init();                       // 初期化
   lcd.setTextEFont();               // efontを有効化
   lcd.setRotation(3);               // 0-3で画面の向き
+  lcd.setSwapBytes(true);           // スワップON(色がおかしい場合には変更する)
 
-  // 画像用のスプライト作成
+  // 画面ダブルバッファ用スプライト作成
+  canvas.createSprite(lcd.width(), lcd.height());
+  canvas.setSwapBytes(true);
+  canvas.setTextEFont();            // efontを有効化
+
+  // 画像用スプライト作成
   sprite.createSprite(imgWidth, imgHeight);
   sprite.setSwapBytes(true);
   sprite.pushImage(0, 0, imgWidth, imgHeight, img);
+
 }
 
 void loop() {
@@ -43,7 +55,9 @@ void loop() {
   // 画像をランダムに表示
   int x = random(lcd.width());
   int y = random(lcd.height());
-  sprite.pushSprite(x, y);
+  int angle = random(360);
+  canvas.setPivot(x, y);
+  sprite.pushRotated(&canvas, angle);
 
   // FPS更新
   ++frame_count;
@@ -56,9 +70,12 @@ void loop() {
 
   // 文字表示
   char str[256];
-  sprintf(str, "LovyanGFX検証 %3dfps", fps);
-  lcd.setCursor(0, 0);
-  lcd.printf(str);
+  sprintf(str, "GFXDBImgRT565検証%3d", fps);
+  canvas.setCursor(0, 0);
+  canvas.printf(str);
+
+  // 描画
+  canvas.pushSprite(0, 0);
 
   // 描画終了
   lcd.endWrite();
