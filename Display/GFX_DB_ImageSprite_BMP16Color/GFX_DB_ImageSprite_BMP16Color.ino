@@ -65,7 +65,7 @@ void loop() {
 
   // 文字表示
   char str[256];
-  sprintf(str, "GFXDBImg16色 検証%3d", fps);
+  sprintf(str, "GFXDBImg16色検証 %3d", fps);
   canvas.setCursor(0, 0);
   canvas.printf(str);
 

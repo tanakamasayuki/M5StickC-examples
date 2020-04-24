@@ -17,7 +17,7 @@ class M5Display {};                 // 既存の描画関数は使えなくす�
 static LGFX lcd;                    // 描画クラス
 
 // 画面ダブルバッファ用スプライト
-static LGFX_Sprite canvas(&lcd); 
+static LGFX_Sprite canvas(&lcd);
 
 // FPS計算
 static uint32_t sec;

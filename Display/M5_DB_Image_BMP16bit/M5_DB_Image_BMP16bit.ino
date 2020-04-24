@@ -3,7 +3,7 @@
 // フォント関連
 #include <efontEnableJaMini.h>      // 第2水準相当の日本語フォントを読み込み 4千文字139KB
 #include <efont.h>                  // 実際のフォントデータの読み込み
-#include "efontM5StickC.h"
+#include "efontM5StickC.h"          // efontテキスト描画関数
 
 // イメージデータ
 #include "data.h"                   // 画像データの読み込み
