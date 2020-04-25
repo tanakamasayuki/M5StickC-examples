@@ -38,7 +38,7 @@ void dispTask(void *pvParameters) {
     canvas.pushSprite(0, 0);
 
     // 黒で塗りつぶし
-    canvas.fillSprite(0x0000);
+    canvas.fillSprite(BLACK);
 
     // 画像を移動して描画
     x += xd;
