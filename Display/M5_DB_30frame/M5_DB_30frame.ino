@@ -39,7 +39,6 @@ void dispTask(void *pvParameters) {
 
     // 黒で塗りつぶし
     canvas.fillSprite(0x0000);
-    delay(20);
 
     // 画像を移動して描画
     x += xd;
