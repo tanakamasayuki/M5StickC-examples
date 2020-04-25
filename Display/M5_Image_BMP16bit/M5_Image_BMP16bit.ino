@@ -28,7 +28,7 @@ void loop() {
   // 画像をランダムに表示
   int x = random(M5.Lcd.width());
   int y = random(M5.Lcd.height());
-  M5.Lcd.pushImage(x, y, imgWidth, imgHeight, img, 0xffff);
+  M5.Lcd.pushImage(x, y, imgWidth, imgHeight, img);
 
   // FPS更新
   ++frame_count;
