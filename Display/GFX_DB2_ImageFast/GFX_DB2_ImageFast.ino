@@ -32,17 +32,17 @@ void setup() {
   M5.begin();
   M5.Axp.ScreenBreath(12);          // 7-12で明るさ設定
   lcd.init();                       // 初期化
-  lcd.setTextEFont();               // efontを有効化
+  lcd.setFont(&fonts::efont);       // efontを有効化
   lcd.setRotation(3);               // 0-3で画面の向き
   lcd.setSwapBytes(true);           // スワップON(色がおかしい場合には変更する)
 
   // 画面ダブルバッファ用スプライト作成
   canvas1.createSprite(lcd.width(), lcd.height());
   canvas1.setSwapBytes(true);
-  canvas1.setTextEFont();            // efontを有効化
+  canvas1.setFont(&fonts::efont);   // efontを有効化
   canvas2.createSprite(lcd.width(), lcd.height());
   canvas2.setSwapBytes(true);
-  canvas2.setTextEFont();            // efontを有効化
+  canvas2.setFont(&fonts::efont);   // efontを有効化
 
   // 描画開始(SPIを専有)
   lcd.startWrite();

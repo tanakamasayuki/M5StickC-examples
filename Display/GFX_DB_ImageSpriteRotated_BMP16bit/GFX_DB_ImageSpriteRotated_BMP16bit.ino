@@ -32,14 +32,14 @@ void setup() {
   M5.begin();
   M5.Axp.ScreenBreath(12);          // 7-12で明るさ設定
   lcd.init();                       // 初期化
-  lcd.setTextEFont();               // efontを有効化
+  lcd.setFont(&fonts::efont);       // efontを有効化
   lcd.setRotation(3);               // 0-3で画面の向き
   lcd.setSwapBytes(true);           // スワップON(色がおかしい場合には変更する)
 
   // 画面ダブルバッファ用スプライト作成
   canvas.createSprite(lcd.width(), lcd.height());
   canvas.setSwapBytes(true);
-  canvas.setTextEFont();            // efontを有効化
+  canvas.setFont(&fonts::efont);    // efontを有効化
 
   // 画像用スプライト作成
   sprite.createSprite(imgWidth, imgHeight);
