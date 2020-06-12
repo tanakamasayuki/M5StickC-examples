@@ -17,6 +17,7 @@
 
 #define DATA_PRINT              0
 #define REC_DELAY_MS            200
+#define MAX_GAIN                0.56
 
 uint8_t microphonedata0[1024 * 80];
 int data_offset = 0;
@@ -31,7 +32,7 @@ void InitI2SSpeakerOrMic(int mode)
   i2s_config_t i2s_config = {
     .mode                 = (i2s_mode_t)(I2S_MODE_MASTER),
     .sample_rate          = 16000,
-    .bits_per_sample      = I2S_BITS_PER_SAMPLE_16BIT, // is fixed at 12bit, stereo, MSB
+    .bits_per_sample      = I2S_BITS_PER_SAMPLE_16BIT,
     .channel_format       = I2S_CHANNEL_FMT_ALL_RIGHT,
     .communication_format = I2S_COMM_FORMAT_I2S,
     .intr_alloc_flags     = ESP_INTR_FLAG_LEVEL1,
@@ -117,7 +118,7 @@ void loop() {
     // Auto Gain
     int16_t *p = (int16_t*)microphonedata0;
     for (int i = 0; i < data_offset / 2; i++) {
-      *p = map(*p, data_min, data_max, -32768 * 0.8, 32767 * 0.8);
+      *p = map(*p, data_min, data_max, -32768 * MAX_GAIN, 32767 * MAX_GAIN);
       p++;
     }
     Serial.printf("data_min  : %d\n", data_min);
