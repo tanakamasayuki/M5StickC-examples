@@ -1,8 +1,12 @@
 // https://soundeffect-lab.info/sound/anime/
 // https://online-audio-converter.com/ja/
-// incorrect1.wav
 // https://lang-ship.com/tools/wav2data/
+// incorrect1.wav
 // Sampling : 16000
+// Original Min : -4287(13%)
+// Original Max : 7698(23%)
+// Output Min : -4287(13%)
+// Output Max : 7698(23%)
 
 // Wave File Dump
 const unsigned char wav2[16538] PROGMEM = {

@@ -1,8 +1,12 @@
 // https://soundeffect-lab.info/sound/anime/
 // https://online-audio-converter.com/ja/
-// people-studio-ee1.wav
 // https://lang-ship.com/tools/wav2data/
+// people-studio-ee1.wav
 // Sampling : 16000
+// Original Min : -16606(50%)
+// Original Max : 16593(50%)
+// Output Min : -16606(50%)
+// Output Max : 16593(50%)
 
 // Wave File Dump
 const unsigned char wav3[44716] PROGMEM = {

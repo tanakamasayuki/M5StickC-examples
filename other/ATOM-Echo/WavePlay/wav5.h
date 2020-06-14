@@ -1,8 +1,12 @@
 // https://soundeffect-lab.info/sound/anime/
 // https://online-audio-converter.com/ja/
-// trumpet1.wav
 // https://lang-ship.com/tools/wav2data/
+// trumpet1.wav
 // Sampling : 16000
+// Original Min : -8800(26%)
+// Original Max : 13748(41%)
+// Output Min : -8800(26%)
+// Output Max : 13748(41%)
 
 // Wave File Dump
 const unsigned char wav5[60418] PROGMEM = {
