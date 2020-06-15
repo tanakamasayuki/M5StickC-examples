@@ -15,7 +15,7 @@ AudioFileSourceID3 *id3;
 #define CONFIG_I2S_LRCK_PIN     33
 #define CONFIG_I2S_DATA_PIN     22
 
-#define FILENAME "/11-fanfare.mp3"
+#define FILENAME "/trumpet2.mp3"
 
 void setup()
 {
