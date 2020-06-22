@@ -6,8 +6,58 @@ WiFiClient client;
 
 int menuIndex = 0;
 String menuTitle[] = {"NTP", "LovyanGFX MovingIcons"};
-String menuBin[] = {"/bin/M5StickC-Update-NTP.ino.m5stick_c.bin", "/bin/M5StickC-Update-MovingIcons.ino.m5stick_c.bin"};
+String menuBin[] = {"/tools/update-esp32/M5StickC-Update-NTP.ino.m5stick_c.bin", "/tools/update-esp32/M5StickC-Update-MovingIcons.ino.m5stick_c.bin"};
 int menuCount = 2;
+
+void execOTA(String host, int port, String bin);
+
+void setup() {
+  M5.begin();
+  M5.Lcd.setRotation(3);
+  M5.Lcd.fillScreen(BLACK);
+
+  M5.Lcd.setTextSize(1);
+  M5.Lcd.setCursor(0, 0);
+  M5.Lcd.println("M5StickC Update Menu");
+
+  M5.Lcd.setCursor(0, 8 * 3);
+  for (int i = 0; i < menuCount; i++) {
+    M5.Lcd.printf(" %s\n", menuTitle[i].c_str());
+  }
+  M5.Lcd.setCursor(0, 80 - 16);
+  M5.Lcd.println("BtnA: Run");
+  M5.Lcd.println("BtnB: Select");
+}
+
+void loop() {
+  M5.update();
+  M5.Lcd.setCursor(0, 8 * 3);
+  for (int i = 0; i < menuCount; i++) {
+    if (menuIndex == i) {
+      M5.Lcd.println(">");
+    } else {
+      M5.Lcd.println(" ");
+    }
+  }
+
+  if (M5.BtnA.wasPressed()) {
+    M5.Lcd.fillScreen(BLACK);
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setCursor(0, 0);
+    M5.Lcd.println("APP OTA");
+
+    String host = "lang-ship.com";
+    int port = 80;
+    String bin = menuBin[menuIndex];
+    execOTA(host, port, bin);
+  }
+  if (M5.BtnB.wasPressed()) {
+    menuIndex++;
+    menuIndex = menuIndex % menuCount;
+  }
+
+  delay(1);
+}
 
 // Utility to extract header value from headers
 String getHeaderValue(String header, String headerName) {
@@ -118,52 +168,4 @@ void execOTA(String host, int port, String bin) {
     Serial.println("There was no content in the response");
     client.flush();
   }
-}
-
-void setup() {
-  M5.begin();
-  M5.Lcd.setRotation(3);
-  M5.Lcd.fillScreen(BLACK);
-
-  M5.Lcd.setTextSize(1);
-  M5.Lcd.setCursor(0, 0);
-  M5.Lcd.println("M5StickC Update Menu");
-
-  M5.Lcd.setCursor(0, 8 * 3);
-  for (int i = 0; i < menuCount; i++) {
-    M5.Lcd.printf(" %s\n", menuTitle[i].c_str());
-  }
-  M5.Lcd.setCursor(0, 80 - 16);
-  M5.Lcd.println("BtnA: Run");
-  M5.Lcd.println("BtnB: Select");
-}
-
-void loop() {
-  M5.update();
-  M5.Lcd.setCursor(0, 8 * 3);
-  for (int i = 0; i < menuCount; i++) {
-    if (menuIndex == i) {
-      M5.Lcd.println(">");
-    } else {
-      M5.Lcd.println(" ");
-    }
-  }
-
-  if (M5.BtnA.wasPressed()) {
-    M5.Lcd.fillScreen(BLACK);
-    M5.Lcd.setTextSize(2);
-    M5.Lcd.setCursor(0, 0);
-    M5.Lcd.println("APP OTA");
-
-    String host = "hub.lang-ship.com";
-    int port = 80;
-    String bin = menuBin[menuIndex];
-    execOTA(host, port, bin);
-  }
-  if (M5.BtnB.wasPressed()) {
-    menuIndex++;
-    menuIndex = menuIndex % menuCount;
-  }
-
-  delay(1);
 }

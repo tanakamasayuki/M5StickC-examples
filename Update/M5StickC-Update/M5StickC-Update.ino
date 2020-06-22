@@ -10,9 +10,9 @@ void setup() {
   //WiFiに接続したことがない場合には接続してください
   //WiFi.begin("SSID", "KEY");
 
-  String host = "hub.lang-ship.com";
+  String host = "lang-ship.com";
   int port = 80;
-  String bin = "/bin/M5StickC-Update-Menu.ino.m5stick_c.bin";
+  String bin = "/tools/update-esp32/M5StickC-Update-Menu.ino.m5stick_c.bin";
   execOTA(host, port, bin);
 }
 
