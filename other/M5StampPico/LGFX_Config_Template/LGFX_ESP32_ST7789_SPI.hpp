@@ -55,7 +55,11 @@ class LGFX_ESP32_ST7789_SPI : public lgfx::LGFX_Device
         cfg.offset_rotation  = 2;
         cfg.dummy_read_pixel = 16;
         cfg.dummy_read_bits  = 1;
-        cfg.readable         = true;
+        if (cs == -1) {
+          cfg.readable         = false;
+        } else {
+          cfg.readable         = true;
+        }
         cfg.invert           = true;
         cfg.rgb_order        = false;
         cfg.dlen_16bit       = false;
